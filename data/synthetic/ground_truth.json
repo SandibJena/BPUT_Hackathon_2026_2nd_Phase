@@ -1,0 +1,31 @@
+{
+  "illustrative_not_clinically_validated": true,
+  "reference_time": "2026-09-21T10:00:00Z",
+  "cases": {
+    "DEMO-001":{"priority":"INSUFFICIENT_INFO","fields":{"age":45,"symptoms.fever":"reported","symptoms.cough":"reported","symptoms.weakness":"reported","duration":"3 days"},"missing_info":["temperature","breathing_difficulty","chronic_conditions","medication_history"]},
+    "DEMO-002":{"priority":"EMERGENCY","fields":{"symptoms.breathing_difficulty":"reported","vitals.temp":39.0},"missing_info":["spo2","chronic_conditions"]},
+    "DEMO-003":{"priority":"EMERGENCY","fields":{"symptoms.chest_pain":"reported","symptoms.sweating":"reported","age":48},"missing_info":["breathing_difficulty","bp"]},
+    "DEMO-004":{"priority":"EMERGENCY","fields":{"pregnancy_status":"pregnant","gestational_weeks":30,"symptoms.heavy_bleeding":"reported"},"missing_info":["bp","pulse"]},
+    "DEMO-005":{"priority":"EMERGENCY","fields":{"vitals.spo2":88,"symptoms.cough":"reported"},"missing_info":["breathing_difficulty","medication_history"]},
+    "DEMO-006":{"priority":"EMERGENCY","fields":{"symptoms.unconsciousness":"reported"},"missing_info":["onset","vitals"]},
+    "DEMO-007":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","duration":"1 day"},"missing_info":["temperature","breathing_difficulty","chronic_conditions"]},
+    "DEMO-008":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","symptoms.cough":"reported","duration":"2 days"},"missing_info":["temperature","breathing_difficulty","medication_history"]},
+    "DEMO-009":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","contacts":"roommate"},"missing_info":["temperature","breathing_difficulty","chronic_conditions"]},
+    "DEMO-010":{"priority":"NORMAL","fields":{"symptoms.runny_nose":"reported","symptoms.breathing_difficulty":"denied","vitals.spo2":98},"missing_info":[]},
+    "DEMO-011":{"priority":"INSUFFICIENT_INFO","fields":{"age":null,"onset":null},"missing_info":["age","main_complaint","duration","vitals"]},
+    "DEMO-012":{"priority":"INSUFFICIENT_INFO","fields":{"shift_hours":8,"symptoms.ear_noise":"reported"},"missing_info":["duration","exposure","ppe"]},
+    "DEMO-013":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.cough":"reported","exposure":"dust"},"missing_info":["duration","breathing_difficulty","ppe"]},
+    "DEMO-014":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant","gestational_weeks":24},"missing_info":["bp","bleeding","fetal_movement","anc_visits"]},
+    "DEMO-015":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant"},"missing_info":["gestational_age","bp","bleeding","anc_visits"]},
+    "DEMO-016":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":138,"vitals.bp_dia":86},"missing_info":["previous_readings","current_symptoms","medication_history"]},
+    "DEMO-017":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":144,"missed_readings":2},"missing_info":["current_symptoms","medication_history"]},
+    "DEMO-018":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.weakness":"reported"},"missing_info":["temperature","duration","breathing_difficulty"]},
+    "DEMO-019":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.headache":"reported","duration":"2 days"},"missing_info":["temperature","neck_stiffness","medication_history"]},
+    "DEMO-020":{"priority":"NORMAL","fields":{"ppe":"ear protection","shift_hours":8,"vitals.spo2":99},"missing_info":[]},
+    "DEMO-021":{"priority":"HIGH","fields":{"symptoms.fever":"uncertain","symptoms.breathing_difficulty":"uncertain"},"missing_info":["temperature","breathing_difficulty","pregnancy_status"]},
+    "DEMO-022":{"priority":"NORMAL","fields":{"symptoms.wrist_discomfort":"reported","symptoms.breathing_difficulty":"denied","pregnancy_status":"not_pregnant"},"missing_info":[]},
+    "DEMO-023":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":126,"vitals.bp_dia":82},"missing_info":["medication_history"]},
+    "DEMO-024":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant","gestational_weeks":20,"symptoms.fatigue":"reported"},"missing_info":["bp","bleeding","anc_visits"]},
+    "DEMO-025":{"priority":"NORMAL","fields":{"vitals.temp":36.8,"vitals.spo2":99},"missing_info":[]}
+  }
+}

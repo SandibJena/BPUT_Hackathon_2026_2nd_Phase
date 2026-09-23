@@ -1,0 +1,11 @@
+{
+  "version":"illustrative-v1",
+  "requires_human_translation_review":true,
+  "terms":[
+    {"en":"fever","hi":"बुखार","or":"ଜ୍ୱର"},
+    {"en":"cough","hi":"खांसी","or":"କାଶ"},
+    {"en":"weakness","hi":"कमजोरी","or":"ଦୁର୍ବଳତା"},
+    {"en":"difficulty breathing","hi":"सांस लेने में तकलीफ","or":"ଶ୍ୱାସ ନେବାରେ କଷ୍ଟ"},
+    {"en":"bleeding","hi":"खून बहना","or":"ରକ୍ତସ୍ରାବ"}
+  ]
+}
