@@ -1,0 +1,95 @@
+version: illustrative-v1
+status: ILLUSTRATIVE, to be validated by a clinician
+executable: true
+# Phase 2 validates and interprets this declarative DSL; it never evals strings.
+# Missing and denied facts do not equal reported facts. Uncertainty needs review.
+rules:
+  - id: RF001
+    description: Reported breathing difficulty
+    condition: {field: symptoms.breathing_difficulty, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF002
+    description: Unconsciousness or altered consciousness reported
+    condition:
+      any:
+        - {field: symptoms.unconsciousness, op: eq, value: reported}
+        - {field: symptoms.altered_consciousness, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF003
+    description: Chest pain with sweating or breathlessness
+    condition:
+      all:
+        - {field: symptoms.chest_pain, op: eq, value: reported}
+        - any:
+            - {field: symptoms.sweating, op: eq, value: reported}
+            - {field: symptoms.breathing_difficulty, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Combined reported signals require immediate professional review
+  - id: RF004
+    description: Recorded SpO2 below 92 percent
+    condition: {field: vitals.spo2, op: lt, value: 92, unit: '%'}
+    category: EMERGENCY
+    rationale: This value may require professional review immediately
+  - id: RF005
+    description: Seizure reported
+    condition: {field: symptoms.seizure, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF006
+    description: Heavy bleeding reported
+    condition: {field: symptoms.heavy_bleeding, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF007
+    description: Pregnancy with bleeding, severe headache or reduced fetal movement
+    condition:
+      all:
+        - {field: history.pregnancy_status, op: eq, value: pregnant}
+        - any:
+            - {field: symptoms.bleeding, op: eq, value: reported}
+            - {field: symptoms.heavy_bleeding, op: eq, value: reported}
+            - {field: symptoms.severe_headache, op: eq, value: reported}
+            - {field: symptoms.reduced_fetal_movement, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Pregnancy-related signals require immediate professional review
+  - id: RF008
+    description: Reported high fever and neck stiffness
+    condition:
+      all:
+        - {field: symptoms.high_fever, op: eq, value: reported}
+        - {field: symptoms.neck_stiffness, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Combined reported signals require immediate professional review
+  - id: RF009
+    description: Infant or older adult with persistent high fever
+    condition:
+      all:
+        - {field: patient.age_band, op: in, value: [infant, older_adult]}
+        - {field: symptoms.persistent_high_fever, op: eq, value: reported}
+    category: HIGH
+    rationale: Age and reported fever pattern require prompt professional review
+  - id: RF010
+    description: Severe dehydration signs reported
+    condition: {field: symptoms.severe_dehydration_signs, op: eq, value: reported}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF011
+    description: Possible snake or animal bite reported
+    condition: {field: symptoms.snake_or_animal_bite, op: eq, value: reported}
+    category: HIGH
+    rationale: Requires prompt professional review without inferring a diagnosis
+  - id: RF012
+    description: Chest pain in someone aged 40 or older
+    condition:
+      all:
+        - {field: symptoms.chest_pain, op: eq, value: reported}
+        - {field: patient.age, op: gte, value: 40}
+    category: EMERGENCY
+    rationale: Requires immediate professional review
+  - id: RF013
+    description: Breathing difficulty is uncertain rather than denied
+    condition: {field: symptoms.breathing_difficulty, op: eq, value: uncertain}
+    category: HIGH
+    rationale: Manual review needed to clarify a possible urgency signal

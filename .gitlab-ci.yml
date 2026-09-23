@@ -1,0 +1,27 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+
+stages:
+  - verify
+
+backend:
+  stage: verify
+  image: python:3.12-slim
+  script:
+    - python -m pip install -e './backend[dev]'
+    - python -m pytest backend/tests -q
+    - python -m app.seed
+    - python -m app.evaluate
+
+frontend:
+  stage: verify
+  image: node:22-bookworm-slim
+  variables:
+    NEXT_TELEMETRY_DISABLED: '1'
+  script:
+    - cd frontend
+    - npm install
+    - npm run typecheck
+    - npm run build
