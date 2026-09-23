@@ -1,32 +1,37 @@
-from contextlib import asynccontextmanager
-
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from app.api.v1.router import api_router
+from app.core.database import init_db
+from app.core.config import settings
 
-from app.api.health import router
-from app.core.config import DISCLAIMER, Settings
-from app.core.database import build_engine, initialize
+app = FastAPI(
+    title="Healthcare Triage Assistant",
+    description=f"Stage 1 backend. \n\n**DISCLAIMER:** {settings.DISCLAIMER}",
+    version="1.0.0"
+)
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-def create_app(settings: Settings | None = None) -> FastAPI:
-    settings = settings or Settings()
+@app.on_event("startup")
+def on_startup():
+    init_db()
 
-    @asynccontextmanager
-    async def lifespan(application: FastAPI):
-        engine = build_engine(settings.resolved_database_url)
-        initialize(engine)
-        application.state.engine = engine
-        try:
-            yield
-        finally:
-            engine.dispose()
+@app.get("/")
+def read_root():
+    return {"status": "ok", "version": "1.0.0", "disclaimer": settings.DISCLAIMER}
 
-    application = FastAPI(title='Saathi — Synthetic Triage Foundation',
-                          version='0.1.0', description=DISCLAIMER, lifespan=lifespan)
-    application.add_middleware(CORSMiddleware, allow_origins=[settings.frontend_origin],
-                               allow_methods=['GET'], allow_headers=['Content-Type'])
-    application.include_router(router)
-    return application
+app.include_router(api_router, prefix="/api/v1")
 
-
-app = create_app()
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error"}
+    )

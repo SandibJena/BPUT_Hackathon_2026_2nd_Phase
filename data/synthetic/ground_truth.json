@@ -1,31 +1,227 @@
-{
-  "illustrative_not_clinically_validated": true,
-  "reference_time": "2026-09-21T10:00:00Z",
-  "cases": {
-    "DEMO-001":{"priority":"INSUFFICIENT_INFO","fields":{"age":45,"symptoms.fever":"reported","symptoms.cough":"reported","symptoms.weakness":"reported","duration":"3 days"},"missing_info":["temperature","breathing_difficulty","chronic_conditions","medication_history"]},
-    "DEMO-002":{"priority":"EMERGENCY","fields":{"symptoms.breathing_difficulty":"reported","vitals.temp":39.0},"missing_info":["spo2","chronic_conditions"]},
-    "DEMO-003":{"priority":"EMERGENCY","fields":{"symptoms.chest_pain":"reported","symptoms.sweating":"reported","age":48},"missing_info":["breathing_difficulty","bp"]},
-    "DEMO-004":{"priority":"EMERGENCY","fields":{"pregnancy_status":"pregnant","gestational_weeks":30,"symptoms.heavy_bleeding":"reported"},"missing_info":["bp","pulse"]},
-    "DEMO-005":{"priority":"EMERGENCY","fields":{"vitals.spo2":88,"symptoms.cough":"reported"},"missing_info":["breathing_difficulty","medication_history"]},
-    "DEMO-006":{"priority":"EMERGENCY","fields":{"symptoms.unconsciousness":"reported"},"missing_info":["onset","vitals"]},
-    "DEMO-007":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","duration":"1 day"},"missing_info":["temperature","breathing_difficulty","chronic_conditions"]},
-    "DEMO-008":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","symptoms.cough":"reported","duration":"2 days"},"missing_info":["temperature","breathing_difficulty","medication_history"]},
-    "DEMO-009":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.fever":"reported","contacts":"roommate"},"missing_info":["temperature","breathing_difficulty","chronic_conditions"]},
-    "DEMO-010":{"priority":"NORMAL","fields":{"symptoms.runny_nose":"reported","symptoms.breathing_difficulty":"denied","vitals.spo2":98},"missing_info":[]},
-    "DEMO-011":{"priority":"INSUFFICIENT_INFO","fields":{"age":null,"onset":null},"missing_info":["age","main_complaint","duration","vitals"]},
-    "DEMO-012":{"priority":"INSUFFICIENT_INFO","fields":{"shift_hours":8,"symptoms.ear_noise":"reported"},"missing_info":["duration","exposure","ppe"]},
-    "DEMO-013":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.cough":"reported","exposure":"dust"},"missing_info":["duration","breathing_difficulty","ppe"]},
-    "DEMO-014":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant","gestational_weeks":24},"missing_info":["bp","bleeding","fetal_movement","anc_visits"]},
-    "DEMO-015":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant"},"missing_info":["gestational_age","bp","bleeding","anc_visits"]},
-    "DEMO-016":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":138,"vitals.bp_dia":86},"missing_info":["previous_readings","current_symptoms","medication_history"]},
-    "DEMO-017":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":144,"missed_readings":2},"missing_info":["current_symptoms","medication_history"]},
-    "DEMO-018":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.weakness":"reported"},"missing_info":["temperature","duration","breathing_difficulty"]},
-    "DEMO-019":{"priority":"INSUFFICIENT_INFO","fields":{"symptoms.headache":"reported","duration":"2 days"},"missing_info":["temperature","neck_stiffness","medication_history"]},
-    "DEMO-020":{"priority":"NORMAL","fields":{"ppe":"ear protection","shift_hours":8,"vitals.spo2":99},"missing_info":[]},
-    "DEMO-021":{"priority":"HIGH","fields":{"symptoms.fever":"uncertain","symptoms.breathing_difficulty":"uncertain"},"missing_info":["temperature","breathing_difficulty","pregnancy_status"]},
-    "DEMO-022":{"priority":"NORMAL","fields":{"symptoms.wrist_discomfort":"reported","symptoms.breathing_difficulty":"denied","pregnancy_status":"not_pregnant"},"missing_info":[]},
-    "DEMO-023":{"priority":"INSUFFICIENT_INFO","fields":{"vitals.bp_sys":126,"vitals.bp_dia":82},"missing_info":["medication_history"]},
-    "DEMO-024":{"priority":"INSUFFICIENT_INFO","fields":{"pregnancy_status":"pregnant","gestational_weeks":20,"symptoms.fatigue":"reported"},"missing_info":["bp","bleeding","anc_visits"]},
-    "DEMO-025":{"priority":"NORMAL","fields":{"vitals.temp":36.8,"vitals.spo2":99},"missing_info":[]}
+[
+  {
+    "pseudonym_id": "DEMO-001",
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-003", "RULE-012"],
+    "expected_chief_complaint": "Chest pain with sweating and breathlessness",
+    "expected_symptoms": ["chest pain", "sweating", "breathlessness"],
+    "expected_missing_info": ["exact onset time", "radiation of pain", "previous cardiac history"],
+    "notes": "Clear EMERGENCY - must not be under-triaged"
+  },
+  {
+    "pseudonym_id": "DEMO-002",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Mild headache",
+    "expected_symptoms": ["headache"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-003",
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-009", "RULE-013"],
+    "expected_chief_complaint": "Fever for 6 days",
+    "expected_symptoms": ["fever"],
+    "expected_missing_info": ["other symptoms like cough or pain"],
+    "notes": "HIGH risk due to age and fever duration"
+  },
+  {
+    "pseudonym_id": "DEMO-004",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Skin rash",
+    "expected_symptoms": ["itchy rash"],
+    "expected_missing_info": ["new exposures"],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-005",
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Feeling unwell",
+    "expected_symptoms": [],
+    "expected_missing_info": ["symptoms", "duration", "severity"],
+    "notes": "Needs more information"
+  },
+  {
+    "pseudonym_id": "DEMO-006",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Sore throat",
+    "expected_symptoms": ["throat pain"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-007",
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-007"],
+    "expected_chief_complaint": "Pregnancy with heavy bleeding",
+    "expected_symptoms": ["heavy bleeding", "pregnancy"],
+    "expected_missing_info": [],
+    "notes": "Clear EMERGENCY - obstetric risk"
+  },
+  {
+    "pseudonym_id": "DEMO-008",
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-012"],
+    "expected_chief_complaint": "Chest pain",
+    "expected_symptoms": ["chest pain"],
+    "expected_missing_info": ["character of pain"],
+    "notes": "HIGH risk due to age and chest pain"
+  },
+  {
+    "pseudonym_id": "DEMO-009",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "fever",
+    "expected_symptoms": ["fever"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-010",
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "pet dard",
+    "expected_symptoms": ["abdominal pain", "weakness"],
+    "expected_missing_info": ["duration", "severity"],
+    "notes": "Needs more information"
+  },
+  {
+    "pseudonym_id": "DEMO-011",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "knee pain",
+    "expected_symptoms": ["knee pain", "difficulty walking"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-012",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "cold",
+    "expected_symptoms": ["runny nose", "cough"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-013",
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-008"],
+    "expected_chief_complaint": "High fever with neck stiffness",
+    "expected_symptoms": ["high fever", "neck stiffness"],
+    "expected_missing_info": [],
+    "notes": "Clear EMERGENCY - possible meningitis"
+  },
+  {
+    "pseudonym_id": "DEMO-014",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Routine checkup",
+    "expected_symptoms": [],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-015",
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-015"],
+    "expected_chief_complaint": "Severe abdominal pain",
+    "expected_symptoms": ["severe abdominal pain"],
+    "expected_missing_info": ["location of pain", "associated symptoms"],
+    "notes": "HIGH risk due to severe abdominal pain"
+  },
+  {
+    "pseudonym_id": "DEMO-016",
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "chest discomfort",
+    "expected_symptoms": ["chest discomfort"],
+    "expected_missing_info": ["age", "duration", "associated symptoms"],
+    "notes": "Needs more information"
+  },
+  {
+    "pseudonym_id": "DEMO-017",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "back pain",
+    "expected_symptoms": ["back pain"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-018",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Refill meds",
+    "expected_symptoms": [],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-019",
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-004"],
+    "expected_chief_complaint": "Breathing issue",
+    "expected_symptoms": ["breathlessness", "low spo2"],
+    "expected_missing_info": [],
+    "notes": "Clear EMERGENCY - hypoxemia"
+  },
+  {
+    "pseudonym_id": "DEMO-020",
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-014"],
+    "expected_chief_complaint": "Sudden vision problem",
+    "expected_symptoms": ["sudden vision loss"],
+    "expected_missing_info": ["pain", "trauma history"],
+    "notes": "HIGH risk due to acute sensory loss"
+  },
+  {
+    "pseudonym_id": "DEMO-021",
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Industrial exposure",
+    "expected_symptoms": [],
+    "expected_missing_info": ["type of exposure", "symptoms"],
+    "notes": "Needs more information"
+  },
+  {
+    "pseudonym_id": "DEMO-022",
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-011"],
+    "expected_chief_complaint": "Snake bite",
+    "expected_symptoms": ["snake bite", "pain"],
+    "expected_missing_info": [],
+    "notes": "Clear EMERGENCY - envenomation risk"
+  },
+  {
+    "pseudonym_id": "DEMO-023",
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Mild fever",
+    "expected_symptoms": ["fever"],
+    "expected_missing_info": [],
+    "notes": "NORMAL case"
+  },
+  {
+    "pseudonym_id": "DEMO-024",
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-010"],
+    "expected_chief_complaint": "Baby not passing urine",
+    "expected_symptoms": ["diarrhea", "sunken eyes", "no urine", "thirst"],
+    "expected_missing_info": ["recent intake"],
+    "notes": "HIGH risk due to severe dehydration signs in infant"
+  },
+  {
+    "pseudonym_id": "DEMO-025",
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": [],
+    "expected_chief_complaint": "Pregnancy follow up",
+    "expected_symptoms": [],
+    "expected_missing_info": ["gestational age", "specific complaints"],
+    "notes": "Needs more information"
   }
-}
+]

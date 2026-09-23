@@ -1,73 +1,113 @@
-# Saathi — Multimodal Healthcare Triage Assistant
+# Healthcare Triage Assistant — BPUT Hackathon 2026
 
-BPUT Hackathon 2026. Human-in-the-loop information organization for Indian government and institutional health facilities.
+> **Disclaimer**: Educational prototype for triage support only. Not a medical device. Not a substitute for qualified medical advice.
 
-> Educational prototype for triage support only. This system provides decision-support information only. It does not diagnose, prescribe treatment, or replace a qualified healthcare professional.
+A human-in-the-loop, NON-DIAGNOSTIC multimodal triage assistant for Indian government hospitals, PHCs, district hospitals, health camps, company clinics, industrial-estate units and campus health centers.
 
-## Phase 1 scope
+---
 
-Implemented: Next.js 15/React/Tailwind shell, consent-gated **local-only** intake preview, FastAPI health endpoint, Pydantic v2 note schema, SQLAlchemy tables, append-only hash-chained demo audit log, idempotent synthetic seed, 25 fictional patient fixtures, five generated fake reports (PNG and PDF, one intentionally blurry), three schematic images, tests and a foundation fixture evaluation command.
+## Quick Start
 
-**Not implemented yet:** clinical processing, risk classification, LLM/STT/OCR calls, real authentication/authorization, reviewer workflow, export, encryption, retention/purge, offline storage and clinical evaluation. No real patient records, public deployment, or clinical use. The intake preview neither stores nor transmits input. Seeded users cannot log in. Phase 1 does not claim the later-phase safety gates are complete.
+### Prerequisites
+- Python 3.11+
+- Node.js 20+
+- Tesseract OCR installed (`winget install UB-Mannheim.TesseractOCR` on Windows)
+- Anthropic API key (get free at [console.anthropic.com](https://console.anthropic.com))
 
-## Run locally
-
-Requirements: Python 3.11 or 3.12, Node.js 22 LTS, npm, GNU Make. On Windows use WSL2. No API key, model download, OCR engine or GPU is required for Phase 1.
-
-```sh
+### 1. Clone & Configure
+```bash
+# Copy environment files
 cp .env.example .env
-make setup
-make seed
-make dev
+cp backend/.env.example backend/.env
+cp frontend/.env.local.example frontend/.env.local
+
+# Edit .env and add your ANTHROPIC_API_KEY
 ```
 
-Open http://localhost:3000 and http://127.0.0.1:8000/health. `make dev` also seeds idempotently before starting both apps; Ctrl+C stops both. Ports must be free. If setup changes dependencies, run `make setup` again. Dependency ranges are declared; generated npm lockfiles should be reviewed and committed after the first verified install.
-
-```sh
-make test          # backend tests and frontend TypeScript checking
-make build         # production frontend build
-make eval          # foundation fixture validation ONLY, not triage accuracy
+### 2. Run Everything
+```bash
+make dev          # Starts backend (port 8000) + frontend (port 3000)
+make seed         # Load 25 synthetic patients into the database
+make test         # Run backend tests
+make eval         # Run evaluation harness (Stage 7+)
 ```
 
-Evaluation intentionally states that emergency under-triage and all clinical metrics are **not measured** until the processing pipeline exists. Never use expected fixture labels as runtime predictions. Tests use temporary SQLite databases, not the developer database.
+### 3. Demo Users (mock auth)
+| Username | Password | Role |
+|---|---|---|
+| health_worker_1 | demo123 | Health Worker |
+| nurse_1 | demo123 | Nurse |
+| doctor_1 | demo123 | Doctor |
+| admin_1 | demo123 | Admin |
 
-## Configuration and data
+---
 
-`.env` is read by the backend from the repository root. The default database is `backend/triage.db`. `DATABASE_URL` can select a PostgreSQL SQLAlchemy URL, but PostgreSQL migrations and database-enforced audit immutability must be added and tested before using it; Phase 1 is SQLite-only at runtime. Timestamps are UTC. Keep `.env`, database files, uploads, and reports generated from real data out of Git.
+## Architecture
 
-`make seed` loads `data/synthetic/patients.json`, inserts explicitly synthetic demo consent records, creates non-login role fixtures, and generates fake assets under `data/synthetic/reports/` and `data/synthetic/images/`. Rerunning seed does not duplicate records. The synthetic consent records are fixture metadata, not a substitute for consent for future intake. Seed intentionally creates **no triage notes**: processing has not happened yet.
+```
+Patient Input → [Consent Gate] → [PII Masking] → [Rules Engine] ─┐
+                                                                   ↓
+                                              [Risk Merge: max(rules, llm)]
+                                                                   ↓
+[LLM Extraction (Claude)] ─────────────────────────────────────→ [TriageNote]
+                                                                   ↓
+                                              [Reviewer Dashboard (Human)]
+                                                                   ↓
+                                              [Sign-off → Export / Referral PDF]
+```
 
-Dataset: 25 fictional records across six scenarios, EN/HI/Odia narratives, missing values, denied and uncertain symptoms, and five emergency **test expectations**, all illustrative and unvalidated. DEMO-001 starts with incomplete information for the proposed PHC demo. Ground-truth reference date is fixed for reproducible timelines. Generated images are schematic illustrations, not clinical evidence.
+**The LLM can only RAISE priority, never lower it. Rules engine always wins.**
 
-## Layout
+---
 
-- `backend/app/{api,core,models,schemas,services}` — typed API and persistence
-- `backend/tests` — schema, persistence, seed and fixture tests
-- `frontend/app` — accessible mobile-first shell and phase-gated screens
-- `data/synthetic` — fictional inputs and independent expected labels/fields
-- `data/rules/red_flags.yaml` — non-executable illustrative rules for Phase 2
-- `data/glossary` — initial symptom translations (human validation required)
+## Project Structure
 
-## Additional engineering requirements
+```
+BPUT_Hackathon_2026/
+├── backend/              FastAPI + SQLite backend
+│   ├── app/
+│   │   ├── api/          Route handlers
+│   │   ├── core/         Config, database
+│   │   ├── models/       SQLAlchemy models
+│   │   ├── schemas/      Pydantic v2 schemas
+│   │   └── services/     Rules, LLM, OCR, STT, translation, privacy, audit
+│   ├── tests/            pytest test suite
+│   └── seed.py           Load synthetic data
+├── frontend/             Next.js 15 frontend
+│   └── app/              App Router pages
+├── data/
+│   ├── synthetic/        25 fictional patients, lab reports, images
+│   ├── rules/            red_flags.yaml (illustrative rules)
+│   └── glossary/         Hindi/Odia medical term glossary
+├── docs/                 Architecture, safety, privacy, demo script
+├── CLAUDE.md             Master context (hard rules, stack, schema)
+├── Makefile              Dev commands
+└── docker-compose.yml    One-command deployment
+```
 
-- Unknown is not negative: distinguish reported, denied and uncertain symptoms; use null for unknown numeric values.
-- Every vital has an explicit unit. Reference time and timezone are fixed in fixtures; future narrative dates must retain uncertainty.
-- Consent starts unchecked. No browser persistence, upload or external request from the foundation intake.
-- Priority must remain ordinal (EMERGENCY before HIGH before INSUFFICIENT_INFO before NORMAL); later queue weights must never let a lower category outrank an emergency.
-- Failure escalation must preserve an existing EMERGENCY (HIGH is a minimum, never a downgrade).
-- Future note edits must invalidate sign-off; exports must bind to an approved note version.
-- Audit events contain pseudonymous references, never raw symptoms or identifiable payloads. Hash chaining alone is not tamper-proof against database-owner access; external anchoring and concurrency controls are future requirements.
-- Diagnosis names or medications reported by a patient may be retained as attributed history, never generated as conclusions or recommendations. Output controls need to distinguish these cases.
+---
 
-## Roadmap and verification
+## Judging Criteria Coverage
 
-1. Foundation (this change).
-2. Rules + text extraction + monotonic escalation + pipeline tests.
-3. Human review, roles, queue, escalation and signed review revisions.
-4. Voice, OCR, translation and narrow descriptive image support.
-5. Privacy lifecycle, encryption and responsible-AI controls.
-6. Scenario modules, referral PDF and accessibility/offline support.
-7. Clinical fixture evaluation, adversarial tests and resilience.
-8. Demo packaging, deployment, docs and pitch.
+| Criterion | Weight | Stages |
+|---|---|---|
+| Safety-first triage workflow | 20% | 2, 7 |
+| Extraction & summarization | 20% | 2, 4, 7 |
+| Multimodal capability | 15% | 4 |
+| India-wide relevance | 15% | 6 |
+| Human review & escalation | 15% | 3 |
+| Privacy & responsible AI | 10% | 5 |
+| Demo quality | 5% | 8 |
 
-The files are authored remotely. Installation, tests and runtime acceptance must be verified; no passing result is asserted by this README. `.gitlab-ci.yml` runs independent backend tests/seed/fixture validation and frontend typecheck/build jobs for merge requests and the default branch. Inspect the actual pipeline result before merging; CI requires an available runner and package-registry access. A passing build does not replace a browser smoke test of `make dev` and consent withdrawal.
+---
+
+## Safety & Compliance
+
+- **Non-diagnostic**: System produces urgency signals, not diagnoses
+- **Human-in-the-loop**: Every note requires qualified reviewer sign-off
+- **Privacy**: Pseudonymous IDs, PII masking before LLM, configurable TTL purge
+- **Audit**: Append-only, hash-chained audit log
+- **Consent**: Required before any intake; recorded with timestamp
+- **Synthetic data**: No real patient records used anywhere
+
+See [docs/safety.md](docs/safety.md) and [docs/privacy.md](docs/privacy.md) for full details.

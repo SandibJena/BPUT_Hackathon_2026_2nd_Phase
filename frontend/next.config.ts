@@ -1,4 +1,10 @@
 import type { NextConfig } from 'next';
 
-const config: NextConfig = { reactStrictMode: true, poweredByHeader: false };
-export default config;
+const nextConfig: NextConfig = {
+  /* config options here */
+  experimental: {
+    // Add any required experimental flags
+  }
+};
+
+export default nextConfig;

@@ -1,31 +1,677 @@
-{
-  "synthetic": true,
-  "reference_time": "2026-09-21T10:00:00Z",
-  "patients": [
-    {"pseudonym_id":"DEMO-001","synthetic":true,"consent":true,"age":45,"sex":"male","language":"hi","facility_type":"PHC","scenario":"opd_queue","text":"तीन दिन से बुखार, खांसी और कमजोरी है।","vitals":{}},
-    {"pseudonym_id":"DEMO-002","synthetic":true,"consent":true,"age":32,"sex":"female","language":"en","facility_type":"OPD","scenario":"opd_queue","text":"Fever for two days. I am having difficulty breathing now.","vitals":{"temp":39.0}},
-    {"pseudonym_id":"DEMO-003","synthetic":true,"consent":true,"age":48,"sex":"male","language":"en","facility_type":"industrial_unit","scenario":"industrial_screening","text":"Chest pain started 30 minutes ago with sweating during my shift.","vitals":{"pulse":115}},
-    {"pseudonym_id":"DEMO-004","synthetic":true,"consent":true,"age":26,"sex":"female","language":"hi","facility_type":"PHC","scenario":"maternal_followup","text":"मैं गर्भवती हूँ, 30 सप्ताह हुए हैं। आज बहुत खून बह रहा है।","vitals":{}},
-    {"pseudonym_id":"DEMO-005","synthetic":true,"consent":true,"age":68,"sex":"male","language":"en","facility_type":"district","scenario":"chronic_checkin","text":"Cough since yesterday. The health worker recorded oxygen saturation of 88 percent.","vitals":{"spo2":88}},
-    {"pseudonym_id":"DEMO-006","synthetic":true,"consent":true,"age":19,"sex":"female","language":"en","facility_type":"camp","scenario":"health_camp","text":"Companion reports the person is unconscious and not responding now.","vitals":{}},
-    {"pseudonym_id":"DEMO-007","synthetic":true,"consent":true,"age":20,"sex":"male","language":"hi","facility_type":"campus","scenario":"campus_fever","text":"कल से बुखार है। हॉस्टल में रहता हूँ। तापमान नहीं मापा।","vitals":{}},
-    {"pseudonym_id":"DEMO-008","synthetic":true,"consent":true,"age":22,"sex":"female","language":"or","facility_type":"campus","scenario":"campus_fever","text":"ଦୁଇ ଦିନ ହେଲା ଜ୍ୱର ଓ କାଶ ହେଉଛି।","vitals":{}},
-    {"pseudonym_id":"DEMO-009","synthetic":true,"consent":true,"age":21,"sex":"male","language":"en","facility_type":"campus","scenario":"campus_fever","text":"Fever since this morning; a roommate also feels unwell. I have not measured my temperature.","vitals":{}},
-    {"pseudonym_id":"DEMO-010","synthetic":true,"consent":true,"age":30,"sex":"male","language":"en","facility_type":"OPD","scenario":"opd_queue","text":"Mild runny nose since yesterday. No fever, breathing difficulty or chest pain. No existing conditions, medicines or allergies reported. Eating and drinking normally.","vitals":{"temp":36.8,"spo2":98,"pulse":76,"resp_rate":16}},
-    {"pseudonym_id":"DEMO-011","synthetic":true,"consent":true,"age":null,"sex":"not_reported","language":"en","facility_type":"camp","scenario":"health_camp","text":"Feeling unwell. Not sure when it started.","vitals":{}},
-    {"pseudonym_id":"DEMO-012","synthetic":true,"consent":true,"age":35,"sex":"female","language":"hi","facility_type":"company_clinic","scenario":"industrial_screening","text":"काम के बाद कान में आवाज आती है। शिफ्ट आठ घंटे की है।","vitals":{}},
-    {"pseudonym_id":"DEMO-013","synthetic":true,"consent":true,"age":41,"sex":"male","language":"or","facility_type":"industrial_unit","scenario":"industrial_screening","text":"କାମ ପରେ କାଶ ହେଉଛି। ଧୂଳିରେ କାମ କରୁଛି।","vitals":{}},
-    {"pseudonym_id":"DEMO-014","synthetic":true,"consent":true,"age":29,"sex":"female","language":"en","facility_type":"PHC","scenario":"maternal_followup","text":"Pregnant, 24 weeks. Missed the last scheduled check-in. No current symptoms reported.","vitals":{}},
-    {"pseudonym_id":"DEMO-015","synthetic":true,"consent":true,"age":23,"sex":"female","language":"or","facility_type":"CHC","scenario":"maternal_followup","text":"ମୁଁ ଗର୍ଭବତୀ। ପରବର୍ତ୍ତୀ ପରୀକ୍ଷା କେବେ ହେବ ଜାଣିବାକୁ ଚାହୁଁଛି।","vitals":{}},
-    {"pseudonym_id":"DEMO-016","synthetic":true,"consent":true,"age":56,"sex":"female","language":"hi","facility_type":"PHC","scenario":"chronic_checkin","text":"नियमित जांच के लिए आई हूँ। पिछले सप्ताह की रक्तचाप की रीडिंग नहीं है।","vitals":{"bp_sys":138,"bp_dia":86}},
-    {"pseudonym_id":"DEMO-017","synthetic":true,"consent":true,"age":62,"sex":"male","language":"en","facility_type":"company_clinic","scenario":"chronic_checkin","text":"Scheduled check-in. I missed two readings. My medicine names are not available.","vitals":{"bp_sys":144,"bp_dia":88}},
-    {"pseudonym_id":"DEMO-018","synthetic":true,"consent":true,"age":27,"sex":"female","language":"or","facility_type":"camp","scenario":"health_camp","text":"ଆଜି ଦୁର୍ବଳ ଲାଗୁଛି।","vitals":{}},
-    {"pseudonym_id":"DEMO-019","synthetic":true,"consent":true,"age":39,"sex":"male","language":"hi","facility_type":"camp","scenario":"health_camp","text":"दो दिन से सिर में हल्का दर्द है। और जानकारी अभी नहीं है।","vitals":{}},
-    {"pseudonym_id":"DEMO-020","synthetic":true,"consent":true,"age":44,"sex":"male","language":"en","facility_type":"industrial_unit","scenario":"industrial_screening","text":"Scheduled hearing screening, no current symptoms. Uses ear protection during an eight-hour shift. No chronic conditions, medicines or allergies reported.","vitals":{"temp":36.7,"pulse":72,"bp_sys":120,"bp_dia":80,"spo2":99,"resp_rate":16}},
-    {"pseudonym_id":"DEMO-021","synthetic":true,"consent":true,"age":18,"sex":"female","language":"en","facility_type":"campus","scenario":"campus_fever","text":"I might have had a fever yesterday, but did not measure it. Breathing difficulty is uncertain, not denied.","vitals":{}},
-    {"pseudonym_id":"DEMO-022","synthetic":true,"consent":true,"age":33,"sex":"female","language":"en","facility_type":"OPD","scenario":"opd_queue","text":"Mild wrist discomfort after typing since yesterday. No injury, bleeding, fever, chest pain or breathing difficulty. No conditions, medicines or allergies reported; not pregnant.","vitals":{"temp":36.6,"pulse":75,"spo2":99,"resp_rate":16}},
-    {"pseudonym_id":"DEMO-023","synthetic":true,"consent":true,"age":51,"sex":"male","language":"en","facility_type":"PHC","scenario":"chronic_checkin","text":"Routine check-in with no symptoms. No missed visits; readings unchanged from the log. Medication list needs confirmation by the nurse.","vitals":{"bp_sys":126,"bp_dia":82}},
-    {"pseudonym_id":"DEMO-024","synthetic":true,"consent":true,"age":28,"sex":"female","language":"hi","facility_type":"PHC","scenario":"maternal_followup","text":"गर्भावस्था के 20 सप्ताह हैं। आज थोड़ा थकान है। पिछली जांच की तारीख याद नहीं।","vitals":{}},
-    {"pseudonym_id":"DEMO-025","synthetic":true,"consent":true,"age":37,"sex":"male","language":"en","facility_type":"camp","scenario":"health_camp","text":"Routine screening, no symptoms. No existing conditions, medicines or allergies reported. Eating and drinking normally.","vitals":{"temp":36.8,"pulse":74,"bp_sys":118,"bp_dia":78,"spo2":99,"resp_rate":16}}
-  ]
-}
+[
+  {
+    "pseudonym_id": "DEMO-001",
+    "age_band": "46-60",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Chest pain and sweating since morning",
+    "symptoms_text": "I have severe chest pain since 6am. I am sweating a lot and feel breathless. The pain is crushing.",
+    "vitals": {
+      "temp": null,
+      "pulse": 98,
+      "bp_sys": 150,
+      "bp_dia": 95,
+      "spo2": 94,
+      "resp_rate": 22,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": ["hypertension"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-003", "RULE-012"]
+  },
+  {
+    "pseudonym_id": "DEMO-002",
+    "age_band": "18-30",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Mild headache",
+    "symptoms_text": "I have had a mild headache since yesterday.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 72,
+      "bp_sys": 110,
+      "bp_dia": 70,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 60
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-003",
+    "age_band": "61-75",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Fever for 6 days",
+    "symptoms_text": "I am 72 years old and have had a fever for 6 days now.",
+    "vitals": {
+      "temp": 101.2,
+      "pulse": 88,
+      "bp_sys": 130,
+      "bp_dia": 80,
+      "spo2": 97,
+      "resp_rate": 18,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": ["diabetes"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-009", "RULE-013"]
+  },
+  {
+    "pseudonym_id": "DEMO-004",
+    "age_band": "31-45",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Skin rash",
+    "symptoms_text": "I noticed an itchy rash on my arm this morning.",
+    "vitals": {
+      "temp": 98.4,
+      "pulse": 76,
+      "bp_sys": 120,
+      "bp_dia": 80,
+      "spo2": 98,
+      "resp_rate": 14,
+      "weight": 75
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": ["dust"],
+      "pregnancy_status": null
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-005",
+    "age_band": "31-45",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Feeling unwell",
+    "symptoms_text": "I am just feeling unwell.",
+    "vitals": {
+      "temp": null,
+      "pulse": null,
+      "bp_sys": null,
+      "bp_dia": null,
+      "spo2": null,
+      "resp_rate": null,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-006",
+    "age_band": "13-17",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Sore throat",
+    "symptoms_text": "My throat hurts when I swallow.",
+    "vitals": {
+      "temp": 99.0,
+      "pulse": 80,
+      "bp_sys": 115,
+      "bp_dia": 75,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 55
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-007",
+    "age_band": "18-30",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "PHC",
+    "scenario": "maternal_followup",
+    "chief_complaint": "Pregnancy with heavy bleeding",
+    "symptoms_text": "I am 7 months pregnant and having heavy bleeding since 2 hours.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 110,
+      "bp_sys": 100,
+      "bp_dia": 60,
+      "spo2": 97,
+      "resp_rate": 20,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": true
+    },
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-007"]
+  },
+  {
+    "pseudonym_id": "DEMO-008",
+    "age_band": "31-45",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "PHC",
+    "scenario": "chronic_checkin",
+    "chief_complaint": "Chest pain",
+    "symptoms_text": "I am 45 years old, experiencing some chest pain. No breathlessness.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 85,
+      "bp_sys": 135,
+      "bp_dia": 85,
+      "spo2": 98,
+      "resp_rate": 16,
+      "weight": 80
+    },
+    "history": {
+      "chronic_conditions": ["high cholesterol"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-012"]
+  },
+  {
+    "pseudonym_id": "DEMO-009",
+    "age_band": "18-30",
+    "sex": "female",
+    "language": "hi",
+    "facility_type": "campus",
+    "scenario": "campus_fever",
+    "chief_complaint": "fever",
+    "symptoms_text": "मुझे कल रात से हल्का बुखार है।",
+    "vitals": {
+      "temp": 99.5,
+      "pulse": 78,
+      "bp_sys": 110,
+      "bp_dia": 70,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 52
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-010",
+    "age_band": "31-45",
+    "sex": "male",
+    "language": "hi",
+    "facility_type": "industrial_unit",
+    "scenario": "industrial_screening",
+    "chief_complaint": "pet dard",
+    "symptoms_text": "मुझे पेट में दर्द हो रहा है और कमजोरी महसूस हो रही है।",
+    "vitals": {
+      "temp": null,
+      "pulse": null,
+      "bp_sys": null,
+      "bp_dia": null,
+      "spo2": null,
+      "resp_rate": null,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-011",
+    "age_band": "46-60",
+    "sex": "female",
+    "language": "od",
+    "facility_type": "CHC",
+    "scenario": "chronic_checkin",
+    "chief_complaint": "knee pain",
+    "symptoms_text": "Mora athu betha heuchi, chalibaku kasta.",
+    "vitals": {
+      "temp": 98.4,
+      "pulse": 74,
+      "bp_sys": 130,
+      "bp_dia": 80,
+      "spo2": 98,
+      "resp_rate": 16,
+      "weight": 70
+    },
+    "history": {
+      "chronic_conditions": ["arthritis"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-012",
+    "age_band": "13-17",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "campus",
+    "scenario": "campus_fever",
+    "chief_complaint": "cold",
+    "symptoms_text": "I have a runny nose and mild cough.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 76,
+      "bp_sys": 115,
+      "bp_dia": 75,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 60
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-013",
+    "age_band": "18-30",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "campus",
+    "scenario": "campus_fever",
+    "chief_complaint": "High fever with neck stiffness",
+    "symptoms_text": "I am a 19 year old student. I have very high fever and my neck is stiff, it hurts to bend forward.",
+    "vitals": {
+      "temp": 103.5,
+      "pulse": 115,
+      "bp_sys": 125,
+      "bp_dia": 85,
+      "spo2": 98,
+      "resp_rate": 20,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-008"]
+  },
+  {
+    "pseudonym_id": "DEMO-014",
+    "age_band": "31-45",
+    "sex": "female",
+    "language": "hi",
+    "facility_type": "maternal_followup",
+    "scenario": "maternal_followup",
+    "chief_complaint": "Routine checkup",
+    "symptoms_text": "मैं 5 महीने की गर्भवती हूँ। सब ठीक है, रूटीन चेकअप के लिए आई हूँ।",
+    "vitals": {
+      "temp": 98.4,
+      "pulse": 80,
+      "bp_sys": 110,
+      "bp_dia": 70,
+      "spo2": 98,
+      "resp_rate": 16,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": true
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-015",
+    "age_band": "31-45",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Severe abdominal pain",
+    "symptoms_text": "I am 38 years old. I have severe stomach pain, it is unbearable.",
+    "vitals": {
+      "temp": 99.1,
+      "pulse": 95,
+      "bp_sys": 130,
+      "bp_dia": 85,
+      "spo2": 98,
+      "resp_rate": 18,
+      "weight": 60
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-015"]
+  },
+  {
+    "pseudonym_id": "DEMO-016",
+    "age_band": null,
+    "sex": "male",
+    "language": "en",
+    "facility_type": "industrial_unit",
+    "scenario": "industrial_screening",
+    "chief_complaint": "chest discomfort",
+    "symptoms_text": "I have some chest discomfort.",
+    "vitals": {
+      "temp": null,
+      "pulse": null,
+      "bp_sys": null,
+      "bp_dia": null,
+      "spo2": null,
+      "resp_rate": null,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-017",
+    "age_band": "61-75",
+    "sex": "male",
+    "language": "od",
+    "facility_type": "chronic_checkin",
+    "scenario": "chronic_checkin",
+    "chief_complaint": "back pain",
+    "symptoms_text": "Mora pithi byatha heuchi alpa alpa.",
+    "vitals": {
+      "temp": 98.4,
+      "pulse": 72,
+      "bp_sys": 140,
+      "bp_dia": 90,
+      "spo2": 98,
+      "resp_rate": 16,
+      "weight": 68
+    },
+    "history": {
+      "chronic_conditions": ["hypertension"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-018",
+    "age_band": "46-60",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "chronic_checkin",
+    "scenario": "chronic_checkin",
+    "chief_complaint": "Refill meds",
+    "symptoms_text": "I am here to refill my diabetes medication. I am feeling fine.",
+    "vitals": {
+      "temp": 98.5,
+      "pulse": 75,
+      "bp_sys": 125,
+      "bp_dia": 80,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 70
+    },
+    "history": {
+      "chronic_conditions": ["diabetes"],
+      "meds_mentioned": ["metformin"],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-019",
+    "age_band": "61-75",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "industrial_unit",
+    "scenario": "industrial_screening",
+    "chief_complaint": "Breathing issue",
+    "symptoms_text": "I am 67 years old. I am feeling a bit out of breath and they checked my oxygen.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 105,
+      "bp_sys": 140,
+      "bp_dia": 85,
+      "spo2": 88,
+      "resp_rate": 24,
+      "weight": 70
+    },
+    "history": {
+      "chronic_conditions": ["COPD"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-004"]
+  },
+  {
+    "pseudonym_id": "DEMO-020",
+    "age_band": "46-60",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "OPD",
+    "scenario": "opd_queue",
+    "chief_complaint": "Sudden vision problem",
+    "symptoms_text": "I am 55 years old and I suddenly lost vision in my right eye.",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 82,
+      "bp_sys": 160,
+      "bp_dia": 95,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": ["hypertension"],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-014"]
+  },
+  {
+    "pseudonym_id": "DEMO-021",
+    "age_band": "18-30",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "industrial_unit",
+    "scenario": "industrial_screening",
+    "chief_complaint": "Industrial exposure",
+    "symptoms_text": "I had some exposure to something at work.",
+    "vitals": {
+      "temp": null,
+      "pulse": null,
+      "bp_sys": null,
+      "bp_dia": null,
+      "spo2": null,
+      "resp_rate": null,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-022",
+    "age_band": "31-45",
+    "sex": "male",
+    "language": "hi",
+    "facility_type": "camp",
+    "scenario": "health_camp",
+    "chief_complaint": "Snake bite",
+    "symptoms_text": "मुझे एक घंटे पहले सांप ने काटा है, दर्द बहुत ज्यादा है।",
+    "vitals": {
+      "temp": 98.6,
+      "pulse": 110,
+      "bp_sys": 110,
+      "bp_dia": 70,
+      "spo2": 98,
+      "resp_rate": 22,
+      "weight": 65
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "EMERGENCY",
+    "expected_triggered_rules": ["RULE-011"]
+  },
+  {
+    "pseudonym_id": "DEMO-023",
+    "age_band": "18-30",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "campus",
+    "scenario": "campus_fever",
+    "chief_complaint": "Mild fever",
+    "symptoms_text": "I have had a mild fever since this morning.",
+    "vitals": {
+      "temp": 99.8,
+      "pulse": 85,
+      "bp_sys": 110,
+      "bp_dia": 70,
+      "spo2": 99,
+      "resp_rate": 16,
+      "weight": 55
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": false
+    },
+    "expected_priority": "NORMAL",
+    "expected_triggered_rules": []
+  },
+  {
+    "pseudonym_id": "DEMO-024",
+    "age_band": "0-12",
+    "sex": "male",
+    "language": "en",
+    "facility_type": "camp",
+    "scenario": "health_camp",
+    "chief_complaint": "Baby not passing urine",
+    "symptoms_text": "My 2 year old has severe diarrhea, sunken eyes, and hasn't passed urine in 9 hours. Very thirsty.",
+    "vitals": {
+      "temp": 100.2,
+      "pulse": 130,
+      "bp_sys": 80,
+      "bp_dia": 50,
+      "spo2": 97,
+      "resp_rate": 28,
+      "weight": 12
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": null
+    },
+    "expected_priority": "HIGH",
+    "expected_triggered_rules": ["RULE-010"]
+  },
+  {
+    "pseudonym_id": "DEMO-025",
+    "age_band": "18-30",
+    "sex": "female",
+    "language": "en",
+    "facility_type": "maternal_followup",
+    "scenario": "maternal_followup",
+    "chief_complaint": "Pregnancy follow up",
+    "symptoms_text": "Pregnant, feeling okay but no gestational age is recorded.",
+    "vitals": {
+      "temp": null,
+      "pulse": null,
+      "bp_sys": null,
+      "bp_dia": null,
+      "spo2": null,
+      "resp_rate": null,
+      "weight": null
+    },
+    "history": {
+      "chronic_conditions": [],
+      "meds_mentioned": [],
+      "allergies": [],
+      "pregnancy_status": true
+    },
+    "expected_priority": "INSUFFICIENT_INFO",
+    "expected_triggered_rules": []
+  }
+]

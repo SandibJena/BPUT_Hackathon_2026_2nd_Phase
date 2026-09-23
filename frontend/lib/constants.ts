@@ -1,15 +1,36 @@
-export const DISCLAIMER = 'Educational prototype for triage support only. This system provides decision-support information only. It does not diagnose, prescribe treatment, or replace a qualified healthcare professional.';
+export const DISCLAIMER = 'Educational prototype for triage support only. Not a medical device. Not a substitute for qualified medical advice.';
 
-export const FACILITIES = [
-  ['OPD', 'Outpatient department'], ['PHC', 'Primary health centre'],
-  ['CHC', 'Community health centre'], ['district', 'District hospital'],
-  ['camp', 'Public health camp'], ['company_clinic', 'Company clinic'],
-  ['industrial_unit', 'Industrial-estate unit'], ['campus', 'Campus health centre'],
-] as const;
+export const PRIORITY_COLORS: Record<string, string> = {
+  EMERGENCY: 'bg-emergency',
+  HIGH: 'bg-high',
+  NORMAL: 'bg-normal',
+  INSUFFICIENT_INFO: 'bg-insufficient',
+};
+
+export const PRIORITY_LABELS: Record<string, string> = {
+  EMERGENCY: 'EMERGENCY',
+  HIGH: 'HIGH',
+  NORMAL: 'NORMAL',
+  INSUFFICIENT_INFO: 'NEEDS INFO',
+};
+
+export const FACILITY_TYPES = [
+  { id: 'chc', name: 'Community Health Centre (CHC)' },
+  { id: 'phc', name: 'Primary Health Centre (PHC)' },
+  { id: 'dh', name: 'District Hospital' },
+];
 
 export const SCENARIOS = [
-  ['opd_queue', 'Outpatient queue'], ['campus_fever', 'Campus fever'],
-  ['industrial_screening', 'Industrial screening'], ['maternal_followup', 'Maternal follow-up'],
-  ['chronic_checkin', 'Chronic check-in'], ['health_camp', 'Public health camp'],
-  ['referral', 'Referral preparation'],
-] as const;
+  { id: 'fever_clinic', name: 'Fever Clinic' },
+  { id: 'maternal', name: 'Maternal Health' },
+  { id: 'trauma', name: 'Trauma/Emergency' },
+  { id: 'general_opd', name: 'General OPD' }
+];
+
+export const AGE_BANDS = [
+  { id: 'infant', name: '0-1 year' },
+  { id: 'child', name: '1-12 years' },
+  { id: 'teen', name: '13-17 years' },
+  { id: 'adult', name: '18-60 years' },
+  { id: 'senior', name: '60+ years' },
+];

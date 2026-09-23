@@ -1,95 +1,136 @@
-version: illustrative-v1
-status: ILLUSTRATIVE, to be validated by a clinician
-executable: true
-# Phase 2 validates and interprets this declarative DSL; it never evals strings.
-# Missing and denied facts do not equal reported facts. Uncertainty needs review.
 rules:
-  - id: RF001
-    description: Reported breathing difficulty
-    condition: {field: symptoms.breathing_difficulty, op: eq, value: reported}
+  - id: RULE-001
+    description: "Difficulty breathing / severe breathlessness"
+    condition_description: "Patient reports difficulty breathing, breathlessness, or cannot complete sentences"
+    triggers_on: ["difficulty breathing", "breathlessness", "can't breathe", "saans lene mein takleef", "shwas lena mushkil"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF002
-    description: Unconsciousness or altered consciousness reported
-    condition:
-      any:
-        - {field: symptoms.unconsciousness, op: eq, value: reported}
-        - {field: symptoms.altered_consciousness, op: eq, value: reported}
+    rationale: "Respiratory distress may indicate life-threatening conditions requiring immediate professional assessment"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: breathing difficulty reported. Requires immediate professional review."
+  - id: RULE-002
+    description: "Unconsciousness or altered consciousness reported"
+    condition_description: "Patient is reported to be unconscious, confused, or unresponsive"
+    triggers_on: ["unconscious", "not waking up", "behosh", "cheta nai"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF003
-    description: Chest pain with sweating or breathlessness
-    condition:
-      all:
-        - {field: symptoms.chest_pain, op: eq, value: reported}
-        - any:
-            - {field: symptoms.sweating, op: eq, value: reported}
-            - {field: symptoms.breathing_difficulty, op: eq, value: reported}
+    rationale: "Altered consciousness is a sign of central nervous system compromise requiring immediate attention"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: altered consciousness reported. Requires immediate professional review."
+  - id: RULE-003
+    description: "Chest pain with sweating or breathlessness"
+    condition_description: "Patient reports chest pain along with diaphoresis or dyspnea"
+    triggers_on: ["chest pain with sweating", "chest pain and breathless", "seene mein dard aur paseena", "buka byatha ebang gharm"]
     category: EMERGENCY
-    rationale: Combined reported signals require immediate professional review
-  - id: RF004
-    description: Recorded SpO2 below 92 percent
-    condition: {field: vitals.spo2, op: lt, value: 92, unit: '%'}
+    rationale: "Classic presentation of acute coronary syndrome, needing immediate evaluation"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: chest pain with high-risk associated symptoms reported. Requires immediate professional review."
+  - id: RULE-004
+    description: "SpO2 below 92%"
+    condition_description: "Oxygen saturation measured or reported below 92%"
+    triggers_on: ["spo2 below 92", "oxygen less than 92"]
     category: EMERGENCY
-    rationale: This value may require professional review immediately
-  - id: RF005
-    description: Seizure reported
-    condition: {field: symptoms.seizure, op: eq, value: reported}
+    rationale: "Hypoxemia indicating significant respiratory or cardiac dysfunction"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: low oxygen saturation reported. Requires immediate professional review."
+  - id: RULE-005
+    description: "Seizure reported"
+    condition_description: "Patient actively having or recently had a seizure/convulsion"
+    triggers_on: ["seizure", "fit", "convulsion", "daura"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF006
-    description: Heavy bleeding reported
-    condition: {field: symptoms.heavy_bleeding, op: eq, value: reported}
+    rationale: "Risk of airway compromise and brain injury; needs urgent stabilization"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: seizure reported. Requires immediate professional review."
+  - id: RULE-006
+    description: "Heavy uncontrolled bleeding"
+    condition_description: "Patient has active bleeding that is not stopping"
+    triggers_on: ["heavy bleeding", "not stopping blood", "khoon ruk nahi raha"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF007
-    description: Pregnancy with bleeding, severe headache or reduced fetal movement
-    condition:
-      all:
-        - {field: history.pregnancy_status, op: eq, value: pregnant}
-        - any:
-            - {field: symptoms.bleeding, op: eq, value: reported}
-            - {field: symptoms.heavy_bleeding, op: eq, value: reported}
-            - {field: symptoms.severe_headache, op: eq, value: reported}
-            - {field: symptoms.reduced_fetal_movement, op: eq, value: reported}
+    rationale: "Risk of hemorrhagic shock requiring rapid hemostasis and volume replacement"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: uncontrolled bleeding reported. Requires immediate professional review."
+  - id: RULE-007
+    description: "Pregnancy with bleeding, severe headache, or reduced fetal movement"
+    condition_description: "Pregnant patient reporting bleeding, signs of preeclampsia, or decreased fetal movement"
+    triggers_on: ["pregnant and bleeding", "pregnant severe headache", "garbhavati khoon"]
     category: EMERGENCY
-    rationale: Pregnancy-related signals require immediate professional review
-  - id: RF008
-    description: Reported high fever and neck stiffness
-    condition:
-      all:
-        - {field: symptoms.high_fever, op: eq, value: reported}
-        - {field: symptoms.neck_stiffness, op: eq, value: reported}
+    rationale: "Indicators of severe maternal or fetal distress (e.g., abruption, preeclampsia)"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: high-risk obstetric symptoms reported. Requires immediate professional review."
+  - id: RULE-008
+    description: "High fever with neck stiffness"
+    condition_description: "Patient reports high fever accompanied by stiff neck or photophobia"
+    triggers_on: ["fever and neck stiffness", "bukhar aur gardan akadna"]
     category: EMERGENCY
-    rationale: Combined reported signals require immediate professional review
-  - id: RF009
-    description: Infant or older adult with persistent high fever
-    condition:
-      all:
-        - {field: patient.age_band, op: in, value: [infant, older_adult]}
-        - {field: symptoms.persistent_high_fever, op: eq, value: reported}
+    rationale: "Red flag symptoms for meningitis or central nervous system infection"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: fever with neurologic signs reported. Requires immediate professional review."
+  - id: RULE-009
+    description: "Infant or elderly patient with persistent high fever (>24h)"
+    condition_description: "Vulnerable age group with prolonged fever"
+    triggers_on: ["infant fever", "elderly fever"]
     category: HIGH
-    rationale: Age and reported fever pattern require prompt professional review
-  - id: RF010
-    description: Severe dehydration signs reported
-    condition: {field: symptoms.severe_dehydration_signs, op: eq, value: reported}
+    rationale: "Higher risk for severe infection and rapid decompensation in these age extremes"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: persistent fever in vulnerable age group. Recommend rapid professional assessment."
+  - id: RULE-010
+    description: "Severe dehydration signs (no urine >8h, sunken eyes, extreme thirst)"
+    condition_description: "Patient exhibits clinical signs of severe fluid deficit"
+    triggers_on: ["no urine", "sunken eyes", "extreme thirst"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF011
-    description: Possible snake or animal bite reported
-    condition: {field: symptoms.snake_or_animal_bite, op: eq, value: reported}
-    category: HIGH
-    rationale: Requires prompt professional review without inferring a diagnosis
-  - id: RF012
-    description: Chest pain in someone aged 40 or older
-    condition:
-      all:
-        - {field: symptoms.chest_pain, op: eq, value: reported}
-        - {field: patient.age, op: gte, value: 40}
+    rationale: "Risk of hypovolemic shock or acute kidney injury, particularly in children/elderly"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: severe dehydration signs reported. Requires immediate professional review."
+  - id: RULE-011
+    description: "Suspected snake bite or animal bite"
+    condition_description: "History or evidence of envenomation or rabies risk exposure"
+    triggers_on: ["snake bite", "dog bite", "saamp ne kata"]
     category: EMERGENCY
-    rationale: Requires immediate professional review
-  - id: RF013
-    description: Breathing difficulty is uncertain rather than denied
-    condition: {field: symptoms.breathing_difficulty, op: eq, value: uncertain}
+    rationale: "Potential for rapid systemic toxicity or need for time-sensitive prophylaxis"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: animal or snake bite reported. Requires immediate professional review."
+  - id: RULE-012
+    description: "Chest pain in patient aged 40 or above"
+    condition_description: "New onset chest pain in demographic at higher risk for cardiac events"
+    triggers_on: ["chest pain", "seene mein dard", "buka byatha"]
     category: HIGH
-    rationale: Manual review needed to clarify a possible urgency signal
+    rationale: "Age is an independent risk factor; any chest pain warrants careful cardiac evaluation"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: chest pain in at-risk age group. Recommend rapid professional assessment."
+  - id: RULE-013
+    description: "Fever lasting more than 5 days"
+    condition_description: "Prolonged febrile illness without clear resolution"
+    triggers_on: ["fever for 6 days", "fever for a week"]
+    category: HIGH
+    rationale: "May indicate deeper infection, tropical disease, or conditions requiring specific diagnostics"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: prolonged fever reported. Recommend rapid professional assessment."
+  - id: RULE-014
+    description: "Sudden loss of vision or hearing"
+    condition_description: "Acute onset of major sensory deficit"
+    triggers_on: ["can't see suddenly", "vision gone", "blindness"]
+    category: HIGH
+    rationale: "Time-sensitive conditions like arterial occlusion or retinal detachment"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: acute sensory loss reported. Recommend rapid professional assessment."
+  - id: RULE-015
+    description: "Severe abdominal pain"
+    condition_description: "Acute, intense abdominal pain"
+    triggers_on: ["severe stomach pain", "pet mein bahut dard"]
+    category: HIGH
+    rationale: "Potential surgical abdomen (e.g., appendicitis, perforation, ectopic pregnancy)"
+    illustrative: true
+    clinician_review_needed: true
+    approved_output_phrase: "Possible urgency signal detected: severe abdominal pain reported. Recommend rapid professional assessment."

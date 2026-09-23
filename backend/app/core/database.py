@@ -1,38 +1,29 @@
-from sqlalchemy import create_engine, event
-from sqlalchemy.engine import Engine
-from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+from app.core.config import settings
 
+engine = create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Alias for test compatibility
+session_factory = SessionLocal
 
-class Base(DeclarativeBase):
-    pass
+Base = declarative_base()
 
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-def build_engine(url: str) -> Engine:
-    if not url.startswith('sqlite:'):
-        raise ValueError('Phase 1 supports SQLite only; PostgreSQL needs migrations and audit controls.')
-    engine = create_engine(url, connect_args={'check_same_thread': False})
+def init_db():
+    """Create all tables. Safe to call multiple times."""
+    # Import models to ensure they're registered with Base before create_all
+    import app.models.user  # noqa: F401
+    import app.models.patient  # noqa: F401
+    import app.models.consent_record  # noqa: F401
+    import app.models.triage_note  # noqa: F401
+    import app.models.upload  # noqa: F401
+    import app.models.audit_log  # noqa: F401
+    Base.metadata.create_all(bind=engine)
 
-    @event.listens_for(engine, 'connect')
-    def sqlite_pragmas(connection, _):
-        cursor = connection.cursor()
-        cursor.execute('PRAGMA foreign_keys=ON')
-        cursor.execute('PRAGMA busy_timeout=5000')
-        cursor.close()
-
-    return engine
-
-
-def session_factory(engine: Engine) -> sessionmaker[Session]:
-    return sessionmaker(bind=engine, expire_on_commit=False)
-
-
-def initialize(engine: Engine) -> None:
-    import app.models.entities  # noqa: F401 -- register metadata
-    Base.metadata.create_all(engine)
-    with engine.begin() as connection:
-        for operation in ('UPDATE', 'DELETE'):
-            connection.exec_driver_sql(f'''
-                CREATE TRIGGER IF NOT EXISTS audit_no_{operation.lower()}
-                BEFORE {operation} ON audit_log
-                BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;
-            ''')
