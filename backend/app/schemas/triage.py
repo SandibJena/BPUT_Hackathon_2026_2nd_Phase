@@ -9,6 +9,9 @@ class Symptom(BaseModel):
     severity: Optional[str] = None
     notes: Optional[str] = None
     source: str = 'text'
+    # Fields set by signals.py NLP scanner
+    assertion: str = 'reported'  # 'reported' | 'denied' | 'uncertain'
+    evidence: str = ''           # The exact phrase match that triggered this signal
 
 class TimelineEvent(BaseModel):
     time: str

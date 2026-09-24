@@ -23,7 +23,7 @@ ALIASES: dict[str, tuple[str, ...]] = {
     ),
     'unconsciousness': (
         'unconscious', 'not responding', 'not waking up', 'unresponsive',
-        'बेहोश', 'behosh', 'ଅଚେତ',
+        'बेहोश', 'behosh', 'beHosh', 'ଅଚେତ',
     ),
     'altered_consciousness': (
         'altered consciousness', 'new confusion', 'suddenly confused',
@@ -82,9 +82,10 @@ ALIASES: dict[str, tuple[str, ...]] = {
         'unable to drink', 'cannot drink', 'गंभीर निर्जलीकरण',
     ),
     'snake_or_animal_bite': (
-        'snake bite', 'snakebite', 'snake has bitten', 'animal bite', 'dog bite',
-        'सांप ने काटा', 'saamp ne kata', 'कुत्ते ने काटा',
-        'ସାପ କାମୁଡ଼ିଛି',
+        'snake bite', 'snakebite', 'snake has bitten', 'bitten by snake',
+        'dog bite', 'dog bit', 'dog has bitten', 'animal bite', 'bitten by',
+        'सांप ने काटा', 'saamp ne kata', 'saanp ne kata',
+        'कुत्ते ने काटा', 'ସାପ କାମୁଡ଼ିଛି',
     ),
     'sudden_vision_loss': (
         'cannot see', 'vision gone', 'sudden blindness', 'lost vision',
@@ -192,12 +193,24 @@ def _assertion(clause: str, phrase: str) -> str:
     """
     Determine if a phrase is affirmed, denied, or uncertain in a clause.
     Conservative: 'denies' is uncertain until a reviewer verifies.
+
+    Negation must appear BEFORE the symptom phrase to count as denial
+    (e.g. "no chest pain" → denied, but "chest pain not stopping" → reported).
     """
-    context = re.sub(re.escape(phrase), '', clause, flags=re.I)
-    if UNCERTAIN.search(context):
+    phrase_pos = clause.lower().find(phrase.lower())
+    if phrase_pos < 0:
+        # Shouldn't happen since we found a match, but be safe
+        return 'reported'
+
+    # Check for uncertainty in full clause
+    if UNCERTAIN.search(clause):
         return 'uncertain'
-    if NEGATIVE.search(context):
+
+    # Only check negation in the text BEFORE the matched phrase
+    context_before = clause[:phrase_pos]
+    if NEGATIVE.search(context_before):
         return 'denied'
+
     return 'reported'
 
 
