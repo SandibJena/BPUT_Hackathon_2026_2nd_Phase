@@ -85,23 +85,25 @@ BPUT_Hackathon_2026/
 └── docker-compose.yml    One-command deployment
 ```
 
----
+## Implementation Status (Stages 1–3 Complete)
 
-## Judging Criteria Coverage
+See [docs/stages_summary.md](docs/stages_summary.md) for the in-depth technical report.
 
-| Criterion | Weight | Stages |
-|---|---|---|
-| Safety-first triage workflow | 20% | 2, 7 |
-| Extraction & summarization | 20% | 2, 4, 7 |
-| Multimodal capability | 15% | 4 |
-| India-wide relevance | 15% | 6 |
-| Human review & escalation | 15% | 3 |
-| Privacy & responsible AI | 10% | 5 |
-| Demo quality | 5% | 8 |
+| Stage | Feature Focus | Status | Test Coverage |
+|---|---|---|---|
+| **Stage 1** | Foundation, Synthetic Data (25 patients), Base Schema & Models | ✅ Completed | 3/3 Auth & Health tests |
+| **Stage 2** | Multilingual NLP Scanner, Deterministic Rules Engine, LLM Extractor, Risk Merge | ✅ Completed | 40/40 Rules & Pipeline tests |
+| **Stage 3** | Multimodal Voice Intake (faster-whisper), Staff Review Dashboard & Sign-off Gate | ✅ Completed | 61/61 Total Backend tests |
+| **Stage 4** | Lab Report Upload & OCR Pipeline (Tesseract) | ⏳ Up Next | - |
+| **Stage 5** | Image Understanding & Visual Observation | ⏳ Scheduled | - |
+| **Stage 6** | Multilingual & Low-Resource Deployment | ⏳ Scheduled | - |
+| **Stage 7** | Evaluation Harness & Adversarial Testing | ⏳ Scheduled | - |
+| **Stage 8** | Clinician Sign-off, Referral Export & Polish | ⏳ Scheduled | - |
 
 ---
 
 ## Safety & Compliance
+
 
 - **Non-diagnostic**: System produces urgency signals, not diagnoses
 - **Human-in-the-loop**: Every note requires qualified reviewer sign-off
